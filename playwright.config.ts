@@ -30,7 +30,7 @@ export default defineConfig({
   // Configurações globais dos testes
   use: {
     // URL base da aplicação
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'https://www.saucedemo.com',
 
     // Captura de evidências
     screenshot: 'only-on-failure',

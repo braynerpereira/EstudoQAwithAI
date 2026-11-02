@@ -1,39 +1,51 @@
 import { type Locator, type Page } from '@playwright/test';
+import { URLS } from '../config/urls';
 
-// ==============================================
-// Page Object Model (POM) - Exemplo
-// ==============================================
-// Cada página da aplicação deve ter sua própria
-// classe Page Object para encapsular seletores
-// e ações.
-
+/**
+ * Page Object para a tela de Login do SauceDemo
+ */
 export class LoginPage {
   readonly page: Page;
-  readonly emailInput: Locator;
+  readonly usernameInput: Locator;
   readonly passwordInput: Locator;
-  readonly submitButton: Locator;
+  readonly loginButton: Locator;
   readonly errorMessage: Locator;
+  readonly errorIcons: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.emailInput = page.locator('[data-testid="email"]');
-    this.passwordInput = page.locator('[data-testid="password"]');
-    this.submitButton = page.locator('[data-testid="submit"]');
-    this.errorMessage = page.locator('[data-testid="error-message"]');
+    this.usernameInput = page.locator('[data-test="username"]');
+    this.passwordInput = page.locator('[data-test="password"]');
+    this.loginButton = page.locator('[data-test="login-button"]');
+    this.errorMessage = page.locator('[data-test="error"]');
+    this.errorIcons = page.locator('.error_icon');
   }
 
-  async navigate() {
-    await this.page.goto('/login');
+  /**
+   * Acessa a página de login no navegador
+   */
+  async navigate(): Promise<void> {
+    await this.page.goto(URLS.BASE_URL);
   }
 
-  async login(email: string, password: string) {
-    await this.emailInput.fill(email);
+  /**
+   * Preenche o campo de usuário
+   */
+  async fillUsername(username: string): Promise<void> {
+    await this.usernameInput.fill(username);
+  }
+
+  /**
+   * Preenche o campo de senha
+   */
+  async fillPassword(password: string): Promise<void> {
     await this.passwordInput.fill(password);
-    await this.submitButton.click();
   }
 
-  async getErrorMessage(): Promise<string> {
-    return await this.errorMessage.innerText();
+  /**
+   * Clica no botão de login
+   */
+  async clickLogin(): Promise<void> {
+    await this.loginButton.click();
   }
 }
-
