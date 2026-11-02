@@ -1,0 +1,25 @@
+# Dependências
+node_modules/
+
+# Resultados de teste
+test-results/
+playwright-report/
+blob-report/
+
+# Build
+dist/
+
+# Variáveis de ambiente
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
